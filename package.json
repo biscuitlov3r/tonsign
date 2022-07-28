@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1",
+    "express-fileupload": "^1.4.0",
+    "fs": "^0.0.1-security",
+    "handlebars": "^4.7.7",
+    "hbs": "^4.2.0",
+    "jssha": "^3.2.0",
+    "multer": "^1.4.5-lts.1",
+    "sqlite3": "^5.0.8",
+    "tonweb": "^0.0.50"
+  }
+}

@@ -1,0 +1,67 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>TONSign</title>
+        <link rel="stylesheet" href="/petition.css" />
+        <script src="/jquery-3.6.0.min.js"></script>
+        <script defer src="/sign.js"></script>
+    </head>
+    <body>
+        <div id="box1" class="container">
+            <h1 id="title">{{petition.title}}</h1>
+            <h2 id="count">{{count}} подписей</h2>
+            {{#if petition.image}}
+                <img id="image" src="/{{petition.image}}" alt="" />
+            {{/if}}
+        </div>
+        <div id="b2" class="container">
+            <p id="description">{{petition.description}}</p>
+            <p>
+                <a
+                    href="https://tonscan.org/address/{{petition.author}}"
+                >Кошелек автора петиции</a>
+            </p>
+            <p><a href="/signatures/{{petition.id}}">Подписи</a></p>
+        </div>
+        <div class="container">
+            <h3>Подпишите эту петицию прямо сейчас.</h3>
+            <p>Это будет стоить вам 0.000000001 TON.</p>
+            <div id="editbox">
+                <input
+                    id="full_name"
+                    type="text"
+                    placeholder="Ваше ФИО (как в паспорте)"
+                /><br />
+                <textarea
+                    placeholder="Комментарий (необязательно)"
+                    id="comment"
+                    cols="30"
+                    rows="10"
+                ></textarea><br />
+                <button
+                    onclick="sign('{{petition.author}}', {{petition.id}})"
+                    id="sign"
+                >Подписать</button>
+            </div>
+            <p>Ваше ФИО и комментарий будут открыто отображаться в блокчейне и
+                не будут зашифрованы.
+                <a
+                    href="https://biscuitlov3r.github.io/tonsigndocs/whymetadata"
+                >Почему?</a>
+            </p>
+            <p class="legal">
+                Нажимая на кнопку "Создать" и загружая обложку, вы соглашаетесь
+                с нашей<br />
+                <a
+                    href="https://biscuitlov3r.github.io/tonsigndocs/privacy"
+                >политикой конфиденциальности</a>
+                и
+                <a
+                    href="https://biscuitlov3r.github.io/tonsigndocs/terms"
+                >условиями использования</a>.
+            </p>
+        </div>
+    </body>
+</html>

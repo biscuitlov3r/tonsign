@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>TONSign</title>
+        <link rel="stylesheet" href="create.css" />
+        <script src="jquery-3.6.0.min.js"></script>
+        <script defer src="create.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Создать петицию</h1>
+        </div>
+        <div id="editbox" class="container">
+            <input id="title" type="text" placeholder="Заголовок" /><br />
+            <textarea
+                placeholder="Описание"
+                id="description"
+                cols="30"
+                rows="10"
+            ></textarea>
+            <input
+                id="address"
+                type="text"
+                placeholder="Адрес TON кошелька"
+            /><br />
+            <input type="file" id="image" name="image" />
+            <label for="image">Обложка петиции (лучше всего 600x300)</label
+            ><br />
+            <br />
+            <button id="create">Создать</button>
+            <p class="legal">
+                Нажимая на кнопку "Создать" и загружая обложку, вы соглашаетесь
+                с нашей<br />
+                <a href="https://biscuitlov3r.github.io/tonsigndocs/privacy"
+                    >политикой конфиденциальности</a
+                >
+                и
+                <a href="https://biscuitlov3r.github.io/tonsigndocs/terms"
+                    >условиями использования</a
+                >.
+            </p>
+        </div>
+    </body>
+</html>

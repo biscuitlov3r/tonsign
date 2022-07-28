@@ -1,0 +1,118 @@
+@font-face {
+    font-family: "Roboto";
+    src: url("/Roboto/Roboto-Regular.ttf");
+}
+* {
+    font-family: "Roboto";
+    color: white;
+}
+body {
+    background-color: #121212;
+}
+input,
+textarea {
+    background-color: #242424;
+    border: none;
+    box-sizing: border-box;
+}
+#editbox {
+    width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+#title {
+    width: 800px;
+    font-weight: bold;
+    font-size: 50px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+#address {
+    font-size: 30px;
+    width: 800px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#description {
+    width: 800px;
+    font-size: 30px;
+    padding: 10px;
+    resize: none;
+    margin-bottom: 10px;
+}
+#image {
+    font-size: 20px;
+}
+button {
+    background-color: #242424;
+    border: 10px solid #1e1e1e;
+    height: 100px;
+    width: 800px;
+    font-size: 40px;
+    margin: 0px;
+}
+/* rgb(0, 0, 51); */
+::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: white;
+}
+
+::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: white;
+}
+.legal {
+    font-size: 10px;
+}
+@media screen and (max-device-width: 830px) {
+    input,
+    textarea {
+        background-color: #242424;
+        border: none;
+        box-sizing: border-box;
+    }
+    #editbox {
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+    }
+    #title {
+        width: 100%;
+        font-weight: bold;
+        font-size: 40px;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+    #address {
+        font-size: 20px;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    #description {
+        width: 100%;
+        font-size: 20px;
+        padding: 10px;
+        resize: none;
+        margin-bottom: 10px;
+    }
+    #image {
+        font-size: 10px;
+    }
+    button {
+        background-color: #242424;
+        border: 10px solid #1e1e1e;
+        height: 100px;
+        width: 100%;
+        font-size: 30px;
+        margin: 0px;
+    }
+}

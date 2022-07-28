@@ -1,0 +1,141 @@
+@font-face {
+    font-family: "Roboto";
+    src: url("/Roboto/Roboto-Regular.ttf");
+}
+* {
+    font-family: "Roboto";
+    color: white;
+}
+#logo {
+    font-size: 100px;
+    color: white;
+    text-align: center;
+}
+#logodiv {
+    margin: 0 auto;
+    width: 600px;
+    background-color: transparent;
+    height: 120px;
+}
+body {
+    background-color: #121212;
+}
+#mini-desc {
+    font-size: 50px;
+}
+span {
+    color: white;
+    background-color: red;
+}
+.typed-cursor {
+    background-color: transparent;
+}
+
+#b {
+    margin: 0 auto;
+    width: 760px;
+}
+body {
+    padding: 0px;
+    margin: 0px;
+}
+.block h1 {
+    font-size: 50px;
+}
+.block p {
+    font-size: 30px;
+}
+.block {
+    padding-left: 50px;
+    width: 800px;
+    box-sizing: border-box;
+}
+button {
+    background-color: transparent;
+    border: 10px solid white;
+    background-color: red;
+    height: 100px;
+    width: 500px;
+    font-size: 40px;
+    margin-bottom: 50px;
+}
+@media screen and (max-device-width: 890px) {
+    #logo {
+        font-size: 70px;
+    }
+    .block {
+        word-wrap: break-word;
+    }
+    #mini-desc {
+        font-size: 30px;
+        text-align: center;
+    }
+    #logodiv {
+        margin: 0 auto;
+        width: 100%;
+        background-color: transparent;
+        height: 90px;
+    }
+    .block h1 {
+        font-size: 30px;
+    }
+    .block p {
+        font-size: 15px;
+    }
+    .block {
+        padding-left: 50px;
+        width: 100%;
+    }
+    button {
+        background-color: transparent;
+        border: 10px solid white;
+        background-color: red;
+        height: 70px;
+        width: 300px;
+        font-size: 40px;
+        margin-bottom: 50px;
+    }
+    #b {
+        margin: 0 auto;
+        width: 100%;
+        padding: 0px;
+    }
+}
+@media screen and (max-device-width: 630px) {
+    .block {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+@media screen and (max-device-width: 480px) {
+    #logo {
+        font-size: 50px;
+    }
+    .block {
+        word-wrap: break-word;
+    }
+    #mini-desc {
+        font-size: 20px;
+        text-align: center;
+    }
+    #logodiv {
+        margin: 0 auto;
+        width: 100%;
+        background-color: transparent;
+        height: 70px;
+    }
+}
+@media screen and (max-device-width: 330px) {
+    button {
+        background-color: transparent;
+        border: 10px solid white;
+        background-color: red;
+        height: 70px;
+        width: 250px;
+        font-size: 40px;
+        margin-bottom: 50px;
+    }
+}
+.signature p {
+    font-size: 20px;
+}

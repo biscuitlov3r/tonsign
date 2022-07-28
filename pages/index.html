@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>TONSign</title>
+        <script src="typed.js"></script>
+        <link rel="stylesheet" href="index.css" />
+    </head>
+    <body>
+        <div class="container">
+            <div id="typed-strings">
+                <p>トンサイン</p>
+                <p>TONSIGN</p>
+            </div>
+            <div id="logodiv">
+                <h1 id="logo">
+                    <i><span id="typed"></span></i>
+                </h1>
+            </div>
+            <script>
+                var typed = new Typed("#typed", {
+                    stringsElement: "#typed-strings",
+                    loop: true,
+                    backDelay: 5000,
+                });
+            </script>
+            <div id="b">
+                <h1 id="mini-desc">
+                    <span><i>Прозрачный</i></span> сбор подписей на <br />основе
+                    блокчейна <a href="https://ton.org">TON</a>
+                </h1>
+            </div>
+        </div>
+        <div class="block">
+            <h1>Открытость</h1>
+            <p>
+                Каждая подпись записывается в блокчейн, где будет доступна
+                любому желающему.<br />
+                Любой человек может лично проверить петицию и убедиться в
+                честности сервиса.
+            </p>
+            <p>
+                TONSign имеет открытый исходный код и распространяется под
+                свободной лицензией GNU GPL.
+            </p>
+        </div>
+        <div class="block">
+            <h1>Устойчивость к цензуре</h1>
+            <p>
+                Все подписи хранятся в блокчейне и не исчезнут, даже если сайт
+                будет заблокирован.
+            </p>
+        </div>
+        <div class="block">
+            <h1>Кто стоит за всем этим?</h1>
+            <p>
+                Все подобности
+                <a href="https://biscuitlov3r.github.io/tonsigndocs/aboutus"
+                    >здесь</a
+                >.
+            </p>
+        </div>
+        <div class="block">
+            <h1>Чего же ты ждешь?</h1>
+            <p>Создай петицию прямо сейчас, нужен только TON кошелек.</p>
+            <button onclick="location.href='/create'">Создать</button>
+        </div>
+    </body>
+</html>

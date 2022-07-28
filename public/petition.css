@@ -1,0 +1,112 @@
+@font-face {
+    font-family: "Roboto";
+    src: url("/Roboto/Roboto-Regular.ttf");
+}
+* {
+    font-family: "Roboto";
+    color: white;
+}
+body {
+    background-color: #121212;
+}
+.container {
+    width: 800px;
+    background-color: #242424;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+#title {
+    font-size: 50px;
+    word-wrap: break-word;
+}
+#description {
+    word-wrap: break-word;
+}
+#box1 {
+    text-align: center;
+}
+#image {
+    max-width: 600px;
+    max-height: 350px;
+}
+#editbox {
+    width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+input,
+textarea {
+    background-color: #1f1f1f;
+    border: none;
+    box-sizing: border-box;
+    width: 500px;
+    padding: 10px;
+    margin-bottom: 10px;
+    resize: none;
+}
+#full_name {
+    font-size: 20px;
+}
+#sign {
+    width: 500px;
+    height: 60px;
+    background: rgb(253, 29, 29);
+    background: linear-gradient(
+        90deg,
+        rgba(253, 29, 29, 1) 27%,
+        rgba(255, 192, 0, 1) 76%
+    );
+    font-size: 20px;
+    border: none;
+}
+@media screen and (max-width: 850px) {
+    .container {
+        width: 100%;
+        background-color: #242424;
+        margin: 0 auto;
+        padding: 10px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+    #editbox {
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+    }
+    #b2 {
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    #image {
+        max-width: 100% !important;
+        height: auto;
+    }
+}
+@media screen and (max-width: 540px) {
+    #title {
+        font-size: 30px;
+    }
+    input,
+    textarea {
+        background-color: #1f1f1f;
+        border: none;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        resize: none;
+    }
+    #sign {
+        width: 100%;
+        height: 60px;
+        background: rgb(253, 29, 29);
+        background: linear-gradient(
+            90deg,
+            rgba(253, 29, 29, 1) 27%,
+            rgba(255, 192, 0, 1) 76%
+        );
+        font-size: 20px;
+        border: none;
+    }
+}

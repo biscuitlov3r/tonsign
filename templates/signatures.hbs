@@ -1,0 +1,41 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>TONSign</title>
+        <link rel="stylesheet" href="/index.css" />
+    </head>
+    <body>
+        <div class="block">
+            <h1>{{petition.title}}</h1>
+            <h3>{{count}} подписей</h3>
+        </div>
+        <div class="block">
+            <p>
+                Вы можете легко проверить каждую подпись используя
+                <a href="https://tonscan.org">tonscan.org</a>
+                или любой другой блокчейн-эксплорер.<br />
+                Учтите, что мы не засчитываем двойную подпись петиции от одного
+                адреса.
+                <a
+                    href="https://biscuitlov3r.github.io/tonsigndocs/aboutsignatures"
+                >Как мы считаем подписи?</a>
+            </p>
+            <p>
+                <a
+                    href="https://tonscan.org/address/{{petition.author}}"
+                >Кошелек автора петиции</a>
+            </p>
+        </div>
+        <div class="block">
+            {{#each signatures}}
+                <hr size="" width="" color="" />
+                <div class="signature">
+                    <p>{{this.address}}<br>{{this.data.full_name}}</h3>
+                    <p>{{this.data.comment}}</p>
+                </div>
+            {{/each}}
+        </div>
+    </body>
+</html>
