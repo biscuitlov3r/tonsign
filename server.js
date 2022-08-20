@@ -7,6 +7,7 @@ const hbs = require("handlebars");
 const fs = require("fs");
 const multer = require("multer");
 const path = require("path");
+const axios = require("axios");
 
 app = express();
 
@@ -24,7 +25,7 @@ app.use(express.static(__dirname + "/uploads"));
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, "uploads/");
+        cb(null, __dirname + "/uploads");
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + path.extname(file.originalname));
@@ -32,7 +33,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-const config = JSON.parse(fs.readFileSync("config.json"));
+const config = JSON.parse(fs.readFileSync(__dirname + "/config.json"));
 
 const tonweb = new TonWeb(
     new TonWeb.HttpProvider("https://toncenter.com/api/v2/jsonRPC", {
@@ -41,7 +42,7 @@ const tonweb = new TonWeb(
 );
 
 async function createPetition(title, description, image, author) {
-    let db = new sqlite.Database("database.db");
+    let db = new sqlite.Database(__dirname + "/database.db");
 
     let promise = new Promise((resolve, reject) => {
         db.all(
@@ -97,7 +98,7 @@ async function createPetition(title, description, image, author) {
     }
 }
 async function getPetition(id) {
-    let db = new sqlite.Database("database.db");
+    let db = new sqlite.Database(__dirname + "/database.db");
 
     let promise = new Promise((resolve, reject) => {
         db.all("SELECT * FROM petitions WHERE id=?", [id], (err, rows) => {
@@ -117,7 +118,14 @@ async function getPetition(id) {
     }
 }
 async function getSignatures(id) {
-    let petition = await getPetition(id);
+    let petition;
+    console.log(typeof id);
+    if (typeof id == "object") {
+        petition = id;
+    } else {
+        petition = await getPetition(id);
+    }
+    console.log(petition);
     ok = false;
     while (ok == false) {
         try {
@@ -183,33 +191,97 @@ app.post("/createPetition", (req, res) => {
     });
 });
 app.get("/p/:id", (req, res) => {
-    getPetition(req.params.id).then((petition) => {
-        if (petition != "not found") {
-            getSignatures(req.params.id).then((signatures) => {
-                res.render("petition.hbs", {
-                    petition: petition,
-                    count: signatures.length,
+    if (req.query.node) {
+        console.log("node: " + req.query.node);
+        axios
+            .get(req.query.node + "/getp", {
+                params: {
+                    id: req.params.id,
+                },
+            })
+            .then(function (response) {
+                console.log(response);
+                if (response.data == "not found") {
+                    res.sendFile(__dirname + "/pages/404.html");
+                }
+
+                getSignatures(response.data.data).then((signatures) => {
+                    console.log(signatures);
+                    res.render("petition.hbs", {
+                        petition: response.data.data,
+                        count: signatures.length,
+                        node: req.query.node,
+                    });
+                });
+            })
+            .catch(function (error) {
+                res.send({
+                    status: "error",
+                    message: "Error when connecting to node",
                 });
             });
-        } else {
-            res.sendFile(__dirname + "/pages/404.html");
-        }
+    } else {
+        getPetition(req.params.id).then((petition) => {
+            if (petition != "not found") {
+                getSignatures(req.params.id).then((signatures) => {
+                    res.render("petition.hbs", {
+                        petition: petition,
+                        count: signatures.length,
+                    });
+                });
+            } else {
+                res.sendFile(__dirname + "/pages/404.html");
+            }
+        });
+    }
+});
+app.get("/getp", (req, res) => {
+    getPetition(req.query.id).then((petition) => {
+        res.send({ status: "success", data: petition });
     });
 });
 app.get("/signatures/:id", (req, res) => {
-    getPetition(req.params.id).then((petition) => {
-        if (petition != "not found") {
-            getSignatures(req.params.id).then((signatures) => {
-                res.render("signatures.hbs", {
-                    petition: petition,
-                    count: signatures.length,
-                    signatures: signatures,
+    if (req.query.node) {
+        axios
+            .get(req.query.node + "/getp", {
+                params: {
+                    id: req.params.id,
+                },
+            })
+            .then(function (response) {
+                if (response.data == "not found") {
+                    res.sendFile(__dirname + "/pages/404.html");
+                }
+
+                getSignatures(response.data.data).then((signatures) => {
+                    res.render("signatures.hbs", {
+                        petition: response.data.data,
+                        count: signatures.length,
+                        signatures: signatures,
+                    });
+                });
+            })
+            .catch(function (error) {
+                res.send({
+                    status: "error",
+                    message: "Error when connecting to node",
                 });
             });
-        } else {
-            res.sendFile(__dirname + "/pages/404.html");
-        }
-    });
+    } else {
+        getPetition(req.params.id).then((petition) => {
+            if (petition != "not found") {
+                getSignatures(req.params.id).then((signatures) => {
+                    res.render("signatures.hbs", {
+                        petition: petition,
+                        count: signatures.length,
+                        signatures: signatures,
+                    });
+                });
+            } else {
+                res.sendFile(__dirname + "/pages/404.html");
+            }
+        });
+    }
 });
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/pages/index.html");

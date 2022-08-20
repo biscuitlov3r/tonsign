@@ -23,7 +23,13 @@
                     href="https://tonscan.org/address/{{petition.author}}"
                 >Кошелек автора петиции</a>
             </p>
-            <p><a href="/signatures/{{petition.id}}">Подписи</a></p>
+            {{#if node}}
+                <p><a
+                        href="/signatures/{{petition.id}}?node={{node}}"
+                    >Подписи</a></p>
+            {{else}}
+                <p><a href="/signatures/{{petition.id}}">Подписи</a></p>
+            {{/if}}
         </div>
         <div class="container">
             <h3>Подпишите эту петицию прямо сейчас.</h3>
