@@ -24,17 +24,28 @@ $("#image").change(() => {
     }
 });
 $("#create").on("click", () => {
-    $.post("/createPetition", {
-        title: $("#title").val(),
-        description: $("#description").val(),
-        image: image,
-        author: $("#address").val(),
-    }).done((response) => {
-        console.log(response);
-        if (response.data != "petition already exists") {
-            location.href = "/p/" + response.data;
-        } else {
-            alert("Ошибка :(");
-        }
-    });
+    if (
+        $("#address").val() == "" ||
+        $("#address").val().length < 48 ||
+        $("#address").val().length > 48
+    ) {
+        alert("Ошибка: Некорректный адрес кошелька :(");
+    } else {
+        $.post("/createPetition", {
+            title: $("#title").val(),
+            description: $("#description").val(),
+            image: image,
+            author: $("#address").val(),
+        }).done((response) => {
+            if (response.data == "petition already exists") {
+                alert("Ошибка :(");
+            } else if (response.data == "uninitialized") {
+                alert(
+                    "Ошибка: Кошелек не существует или не имеет транзакций :("
+                );
+            } else {
+                location.href = "/p/" + response.data;
+            }
+        });
+    }
 });

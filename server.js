@@ -119,14 +119,12 @@ async function getPetition(id) {
 }
 async function getSignatures(id) {
     let petition;
-    console.log(typeof id);
     if (typeof id == "object") {
         petition = id;
     } else {
         petition = await getPetition(id);
     }
-    console.log(petition);
-    ok = false;
+    let ok = false;
     while (ok == false) {
         try {
             transactions = await tonweb.getTransactions(
@@ -134,8 +132,11 @@ async function getSignatures(id) {
                 (limit = 1500000)
             );
             ok = true;
-        } catch {
+        } catch (err) {
             ok = false;
+            if (err == "Incorrect address") {
+                return err;
+            }
         }
     }
 
@@ -158,7 +159,7 @@ async function getSignatures(id) {
             try {
                 signature.comment = b64_to_utf8(signature.comment);
                 signature.full_name = b64_to_utf8(signature.full_name);
-            } catch {
+            } catch (err) {
                 continue;
             }
 
@@ -179,20 +180,40 @@ async function getSignatures(id) {
     }
     return signatures;
 }
+async function checkWallet(address) {
+    if (address == "" || address < 48 || address > 48) {
+        return "uninitialized";
+    }
+    let ok = false;
+    let info;
+    while (ok == false) {
+        try {
+            info = await tonweb.provider.getWalletInfo(address);
+            ok = true;
+        } catch {}
+    }
+    return info.account_state;
+}
 
 app.post("/createPetition", (req, res) => {
-    createPetition(
-        req.body.title,
-        req.body.description,
-        req.body.image,
-        req.body.author
-    ).then((status) => {
-        res.send({ data: status });
+    // Incorrect address
+    checkWallet(req.body.author).then((status) => {
+        if (status == "uninitialized") {
+            res.send({ data: status });
+        } else {
+            createPetition(
+                req.body.title,
+                req.body.description,
+                req.body.image,
+                req.body.author
+            ).then((status) => {
+                res.send({ data: status });
+            });
+        }
     });
 });
 app.get("/p/:id", (req, res) => {
     if (req.query.node) {
-        console.log("node: " + req.query.node);
         axios
             .get(req.query.node + "/getp", {
                 params: {
@@ -200,13 +221,11 @@ app.get("/p/:id", (req, res) => {
                 },
             })
             .then(function (response) {
-                console.log(response);
                 if (response.data == "not found") {
                     res.sendFile(__dirname + "/pages/404.html");
                 }
 
                 getSignatures(response.data.data).then((signatures) => {
-                    console.log(signatures);
                     res.render("petition.hbs", {
                         petition: response.data.data,
                         count: signatures.length,
