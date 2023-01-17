@@ -8,6 +8,7 @@ const fs = require("fs")
 const multer = require("multer")
 const path = require("path")
 const axios = require("axios")
+const sanitize = require("sanitize-filename")
 
 app = express()
 
@@ -361,7 +362,7 @@ app.post("/upload", upload.single("image"), async function (req, res, next) {
   }
 })
 app.get("/uploads/:file", async function (req, res) {
-  let file = req.params.file
+  let file = sanitize(req.params.file)
   await fs.access(__dirname + "/uploads/" + file, function (cb) {
     console.log(cb)
     if (cb == null) {
